@@ -10,20 +10,29 @@
 
 If we have a pyproject.toml file then:
 
-```
+```bash
 [project]
 name = "my-app"
 version = "0.1.0"
 description = "My app description"
 dependencies = [
-  "fastapi",
-  "uvicorn"
+  "fastapi==0.110.0",
+  "uvicorn>=0.29,<0.30",
+  "httpx~=0.27.0"
 ]
 
 [build-system]
 requires = ["uv"]
 build-backend = "uv.build"
 ```
+```
+==1.2.3 — exactly version 1.2.3
+>=1.0.0 — at least 1.0.0
+<2.0.0 — less than 2.0.0
+~=1.4.2 — compatible release (i.e., >=1.4.2, <1.5.0)
+!=1.2.0 — anything except 1.2.0
+```
+
 You can omit build-system if you don’t need to build packages.
 
 Install dependencies from pyproject.toml
@@ -44,7 +53,7 @@ This creates a requirements.txt from the pyproject.toml, similar to pip-tools.
 
 Makefile for uv:
 
-```
+```bash
 VENV_DIR := .venv
 PYTHON := $(VENV_DIR)/bin/python
 
@@ -80,7 +89,7 @@ clean:
 
 Usage:
 
-```
+```bash
 make venv      # Create virtual env
 make install   # Install deps (from lock if available)
 make lock      # Create/refresh lockfile
