@@ -37,7 +37,7 @@ You can omit build-system if you don’t need to build packages.
 
 Install dependencies from pyproject.toml
 
-`uv pip install -r <(uv pip compile)`
+`uv pip install -r <(uv pip compile pyproject.toml)`
 
 Add dependency directly:
 
@@ -47,7 +47,7 @@ This updates both pyproject.toml and your environment.
 
 Lock dependencies:
 
-`uv pip compile --output requirements.txt`
+`uv pip compile pyproject.toml --output-file requirements.lock`
 
 This creates a requirements.txt from the pyproject.toml, similar to pip-tools.
 
@@ -70,7 +70,7 @@ install: venv
 		source $(VENV_DIR)/bin/activate && uv pip install -r requirements.lock; \
 	else \
 		echo "📦 Installing from pyproject.toml"; \
-		source $(VENV_DIR)/bin/activate && uv pip install -r <(uv pip compile); \
+		source $(VENV_DIR)/bin/activate && uv pip install -r <(uv pip compile pyproject.toml); \
 	fi
 
 # Lock dependencies from pyproject.toml
